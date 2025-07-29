@@ -21,6 +21,16 @@
 pnpm run optimize
 ```
 
+### 包构建状态
+
+#### lucide-vue-next 包
+- ✅ 已成功构建
+- 📦 包含 CommonJS、ES 模块、UMD 格式
+- 🔧 修复了 build-icons 工具的 TypeScript 支持
+- 📁 构建输出位于 `packages/lucide-vue-next/dist/`
+
+现在您可以在其他项目中使用 lucide-vue-next 包了。
+
 ### 优化建议
 
 为了进一步改进图标处理流程，我建议未来可以考虑以下几点：

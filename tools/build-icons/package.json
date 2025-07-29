@@ -8,7 +8,7 @@
     "start": "node ./cli.ts"
   },
   "bin": {
-    "build-icons": "./cli.ts"
+    "build-icons": "./cli.js"
   },
   "engines": {
     "node": ">= 23"
