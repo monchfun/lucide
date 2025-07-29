@@ -9,5 +9,5 @@
   stroke-linecap="round"
   stroke-linejoin="round"
 >
-  <polygon points="3 11 22 2 13 21 11 13 3 11" />
+  <path d="m3 11 19-9-9 19-2-8z" />
 </svg>

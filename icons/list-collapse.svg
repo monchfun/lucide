@@ -9,9 +9,5 @@
   stroke-linecap="round"
   stroke-linejoin="round"
 >
-  <path d="M10 12h11" />
-  <path d="M10 18h11" />
-  <path d="M10 6h11" />
-  <path d="m3 10 3-3-3-3" />
-  <path d="m3 20 3-3-3-3" />
+  <path d="M10 12h11m-11 6h11M10 6h11M3 10l3-3-3-3m0 16 3-3-3-3" />
 </svg>

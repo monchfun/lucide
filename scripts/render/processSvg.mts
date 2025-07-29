@@ -16,8 +16,8 @@ async function optimizeSvg(svg: string, path: string) {
         name: 'preset-default',
         params: {
           overrides: {
-            convertShapeToPath: false,
-            mergePaths: false,
+            convertShapeToPath: {},
+            mergePaths: {},
           },
         },
       },
@@ -25,6 +25,70 @@ async function optimizeSvg(svg: string, path: string) {
         name: 'removeAttrs',
         params: {
           attrs: '(fill|stroke.*)',
+        },
+      },
+      {
+        name: 'convertpath',
+        fn: () => {
+          return {
+            element: {
+              enter: (node: any) => {
+                if (node.name === 'rect' && node.attributes.rx) {
+                  const { x, y, width, height, rx, ry } = node.attributes;
+
+                  const numX = Number(x || 0);
+                  const numY = Number(y || 0);
+                  const numWidth = Number(width);
+                  const numHeight = Number(height);
+                  const numRx = Number(rx);
+                  const numRy = Number(ry || rx);
+
+                  const d = `
+                    M${numX + numRx},${numY}
+                    h${numWidth - 2 * numRx}
+                    a${numRx},${numRy} 0 0 1 ${numRx},${numRy}
+                    v${numHeight - 2 * numRy}
+                    a${numRx},${numRy} 0 0 1 ${-numRx},${numRy}
+                    h${-numWidth + 2 * numRx}
+                    a${numRx},${numRy} 0 0 1 ${-numRx},${-numRy}
+                    v${-numHeight + 2 * numRy}
+                    a${numRx},${numRy} 0 0 1 ${numRx},${-numRy}
+                    z
+                  `;
+
+                  delete node.attributes.x;
+                  delete node.attributes.y;
+                  delete node.attributes.width;
+                  delete node.attributes.height;
+                  delete node.attributes.rx;
+                  delete node.attributes.ry;
+
+                  node.name = 'path';
+                  node.attributes.d = d.replace(/\s+/g, ' ');
+                }
+                if (node.name === 'circle') {
+                  const { cx, cy, r } = node.attributes;
+
+                  const numCx = Number(cx);
+                  const numCy = Number(cy);
+                  const numR = Number(r);
+
+                  const d = `
+                    M ${numCx - numR}, ${numCy}
+                    a ${numR},${numR} 0 1,0 ${numR * 2},0
+                    a ${numR},${numR} 0 1,0 ${-numR * 2},0
+                  `;
+
+                  delete node.attributes.cx;
+                  delete node.attributes.cy;
+                  delete node.attributes.r;
+
+                  node.name = 'path';
+                  node.attributes.d = d.replace(/\s+/g, ' ');
+                }
+              },
+            },
+          };
         },
       },
     ],

@@ -9,10 +9,5 @@
   stroke-linecap="round"
   stroke-linejoin="round"
 >
-  <rect width="6" height="14" x="4" y="5" rx="2" />
-  <rect width="6" height="10" x="14" y="7" rx="2" />
-  <path d="M17 22v-5" />
-  <path d="M17 7V2" />
-  <path d="M7 22v-3" />
-  <path d="M7 5V2" />
+  <path d="M6 5h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2m10 2h2a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2m1 15v-5m0-10V2M7 22v-3M7 5V2" />
 </svg>
